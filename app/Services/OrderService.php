@@ -11,30 +11,29 @@ use Illuminate\Support\Str;
 
 class OrderService
 {
-    public function generateOrderNumber(?int $storeId = null): string
+    public function generateOrderNumber(): string
     {
-        $storeId = $storeId ?: auth()->user()?->store_id;
+        $highestNumber = Order::query()
+            ->where('order_number', 'like', 'WT-%')
+            ->pluck('order_number')
+            ->reduce(static function (int $highest, string $orderNumber): int {
+                if (preg_match('/^WT-(\d+)$/', $orderNumber, $matches) === 1) {
+                    return max($highest, (int) $matches[1]);
+                }
 
-        $last = Order::when($storeId, fn($q) => $q->where('store_id', $storeId))
-            ->orderBy('created_at', 'desc')
-            ->first();
+                return $highest;
+            }, 1000);
 
-        if (!$last) {
-            return 'WT-1001';
-        }
+        $nextNumber = $highestNumber + 1;
 
-        if (preg_match('/WT-(\d+)/', $last->order_number, $m)) {
-            return 'WT-' . ((int) $m[1] + 1);
-        }
-
-        return 'WT-' . rand(1000, 9999);
+        return 'WT-' . $nextNumber;
     }
 
     public function createOrder(array $data): Order
     {
         $storeId = $data['store_id'] ?? auth()->user()?->store_id;
         $id = 'o_' . Str::random(10);
-        $orderNumber = $this->generateOrderNumber($storeId);
+        $orderNumber = $this->generateOrderNumber();
 
         $quantity = max(1, (int) ($data['quantity'] ?? 1));
         $mode = $data['duration_mode'] ?? 'auto';

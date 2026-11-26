@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Order;
 use App\Models\ProjectSetting;
 use App\Models\Task;
+use App\Services\OrderService;
 use Tests\TestCase;
 
 class WatiraSystemTest extends TestCase
@@ -23,6 +24,27 @@ class WatiraSystemTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('سجل وإدارة الطلبات');
         $response->assertSee('نورة العتيبي');
+    }
+
+    public function test_generated_order_number_follows_highest_existing_number(): void
+    {
+        $highestNumber = Order::query()
+            ->pluck('order_number')
+            ->map(static function (string $orderNumber): ?int {
+                return preg_match('/^WT-(\d+)$/', $orderNumber, $matches) === 1
+                    ? (int) $matches[1]
+                    : null;
+            })
+            ->filter()
+            ->max();
+
+        $nextNumber = $highestNumber ?? 1000;
+        $nextNumber++;
+
+        $this->assertSame(
+            'WT-' . $nextNumber,
+            app(OrderService::class)->generateOrderNumber()
+        );
     }
 
     public function test_order_show_page_loads_with_tasks(): void
