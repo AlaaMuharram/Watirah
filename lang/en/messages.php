@@ -1,0 +1,4 @@
+<?php
+return [
+'Dashboard'=>'Dashboard','Orders'=>'Orders','Schedule'=>'Schedule','Simulator'=>'Simulator','Delays'=>'Delay Risks','AI'=>'AI Assistant','Settings'=>'Settings','Saved'=>'Saved','Deleted'=>'Deleted','Total'=>'Total','New'=>'New','Pending'=>'Pending','In Progress'=>'In Progress','Completed'=>'Completed','Late'=>'Late','Low'=>'Low','Medium'=>'Medium','High'=>'High','Customer'=>'Customer','Product'=>'Product','Quantity'=>'Quantity','Due Date'=>'Due Date','Status'=>'Status','Risk'=>'Risk','Notes'=>'Notes','Search'=>'Search','Filter'=>'Filter','Add'=>'Add','Edit'=>'Edit','Delete'=>'Delete','Save'=>'Save','Cancel'=>'Cancel','Confirm delete?'=>'Confirm delete?',
+];

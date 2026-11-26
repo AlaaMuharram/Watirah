@@ -1,0 +1,4 @@
+<?php
+return [
+'Dashboard'=>'لوحة المعلومات','Orders'=>'الطلبات','Schedule'=>'جدول التنفيذ','Simulator'=>'محاكاة ضغط العمل','Delays'=>' risks','AI'=>'المساعد الذكي','Settings'=>'الإعدادات','Saved'=>'تم الحفظ','Deleted'=>'تم الحذف','Total'=>'الإجمالي','New'=>'جديد','Pending'=>'قيد الانتظار','In Progress'=>'قيد التنفيذ','Completed'=>'مكتمل','Late'=>'متأخر','Low'=>'منخفض','Medium'=>'متوسط','High'=>'مرتفع','Customer'=>'العميل','Product'=>'المنتج','Quantity'=>'الكمية','Due Date'=>'موعد التسليم','Status'=>'الحالة','Risk'=>'الخطر','Notes'=>'ملاحظات','Search'=>'بحث','Filter'=>'تصفية','Add'=>'إضافة','Edit'=>'تعديل','Delete'=>'حذف','Save'=>'حفظ','Cancel'=>'إلغاء','Confirm delete?'=>'تأكيد الحذف؟',
+];
